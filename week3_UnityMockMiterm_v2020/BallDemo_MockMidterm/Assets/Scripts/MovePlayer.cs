@@ -14,6 +14,8 @@ public class MovePlayer : MonoBehaviour {
 	private Rigidbody rb;
 	private int count;
 
+	[SerializeField] private FloorScript F;
+
 	//************* Need to setup this server dictionary...
 	Dictionary<string, ServerLog> servers = new Dictionary<string, ServerLog> ();
 	//*************
@@ -73,32 +75,40 @@ public class MovePlayer : MonoBehaviour {
 
         if (other.gameObject.CompareTag ("Pick Up")) 
 		{
-			other.gameObject.SetActive (false);
-			count = count + 1;
-			setCountText ();
+			if(other.gameObject.GetComponent<Rotator>().getMat() == F.getCurColor())
+			{
+				other.gameObject.SetActive (false);
+				F.updateColor();
+				count = count + 1;
+				setCountText ();
 
 
-            // change the tempo of the sequence based on how many obejcts we have picked up.
-            if(count < 2)
-            {
-                OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 500);
-            }
-            if (count < 4)
-            {
-                OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 400);
-            }
-            else if(count < 6)
-            {
-                OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 300);
-            }
-            else if (count < 8)
-            {
-                OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 150);
-            }
-            else
-            {
-                OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 0);
-            }
+				// change the tempo of the sequence based on how many obejcts we have picked up.
+				if(count < 2)
+				{
+					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 500);
+				}
+				if (count < 4)
+				{
+					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 400);
+				}
+				else if(count < 6)
+				{
+					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 300);
+				}
+				else if (count < 8)
+				{
+					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 150);
+				}
+				else
+				{
+					OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 0);
+				}
+			}
+			else
+			{
+				Debug.Log("Wrong color");
+			}
 
         }
         else if(other.gameObject.CompareTag("Wall"))

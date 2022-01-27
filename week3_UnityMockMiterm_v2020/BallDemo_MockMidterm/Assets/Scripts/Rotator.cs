@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour {
 
+	private Material M;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +18,19 @@ public class Rotator : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Pick Up"))
+		{
 			other.gameObject.SetActive (false);
+		}
+	}
+
+	public void updateMat (Material m)
+	{
+		M = m;
+		this.GetComponent<Renderer>().material = M;
+	}
+
+	public Material getMat(){
+		return M;
 	}
 }
 
