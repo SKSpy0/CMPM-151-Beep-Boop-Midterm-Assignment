@@ -14,6 +14,8 @@ public class MovePlayer : MonoBehaviour {
 	private Rigidbody rb;
 	private int count;
 
+	private float volume;
+
 	[SerializeField] private FloorScript F;
 
 	//************* Need to setup this server dictionary...
@@ -29,6 +31,7 @@ public class MovePlayer : MonoBehaviour {
 	    OSCHandler.Instance.Init ();
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", "ready");
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 1);
+		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/volume", "ready");
         //*************
 
         rb = GetComponent<Rigidbody> ();
@@ -128,5 +131,9 @@ public class MovePlayer : MonoBehaviour {
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", count);
 		//*************
 	}
-		
+	
+	public void volumeUpdate(float newVol){
+		volume = newVol;
+		OSCHandler.Instance.SendMessageToClient("pd", "/unity/volume", volume);
+	}
 }
