@@ -15,6 +15,7 @@ public class MovePlayer : MonoBehaviour {
 	private int count;
 
 	private float volume;
+	private float ballSpeed;
 
 	[SerializeField] private FloorScript F;
 
@@ -50,6 +51,9 @@ public class MovePlayer : MonoBehaviour {
 		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 
 		rb.AddForce (movement*speed);
+		Debug.Log((movement*speed).magnitude);
+		ballSpeed = (movement*speed).magnitude;
+		speedUpdate();
 
 		//************* Routine for receiving the OSC...
 		OSCHandler.Instance.UpdateLogs();
@@ -135,5 +139,9 @@ public class MovePlayer : MonoBehaviour {
 	public void volumeUpdate(float newVol){
 		volume = newVol;
 		OSCHandler.Instance.SendMessageToClient("pd", "/unity/volume", volume);
+	}
+
+	public void speedUpdate(){
+		OSCHandler.Instance.SendMessageToClient("pd", "/unity/ballspeed", ballSpeed);
 	}
 }
