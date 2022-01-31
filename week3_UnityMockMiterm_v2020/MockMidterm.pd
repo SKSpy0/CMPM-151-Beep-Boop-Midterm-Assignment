@@ -1,4 +1,4 @@
-#N canvas -1577 390 1544 910 10;
+#N canvas -3 0 1660 992 10;
 #X text 177 277 creation arguments are OSC address;
 #X text 179 238 set message to change OSC address;
 #X text 164 48 1 Set IP Address : network address;
@@ -113,7 +113,7 @@
 #X obj 1395 593 + 0;
 #X obj 1378 345 metro 4000;
 #X obj 1380 312 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X floatatom 1436 316 5 0 0 0 - - -;
 #X obj 1359 379 f;
 #X obj 1402 381 + 1;
