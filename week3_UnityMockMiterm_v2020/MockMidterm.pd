@@ -16,7 +16,7 @@
 #X obj 799 370 loadbang;
 #X msg 450 393 0;
 #X floatatom 455 258 5 0 0 0 - - -;
-#N canvas -1181 507 888 530 oscReceive 1;
+#N canvas 630 233 910 530 oscReceive 1;
 #X obj 55 184 netreceive -u -b;
 #X msg 78 143 listen 0;
 #X text 152 143 stop listening;
@@ -46,9 +46,9 @@
 #X floatatom 547 383 5 0 1 0 - - -;
 #X obj 546 360 route volume;
 #X obj 547 410 s glovolume;
-#X floatatom 641 383 5 0 1 0 - - -;
-#X obj 640 360 route ballspeed;
-#X obj 641 410 s ballspeed;
+#X floatatom 651 382 5 0 1 0 - - -;
+#X obj 650 359 route ballspeed;
+#X obj 651 409 s ballspeed;
 #X connect 0 0 6 0;
 #X connect 0 0 8 0;
 #X connect 1 0 0 0;
