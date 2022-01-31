@@ -33,11 +33,13 @@ public class MovePlayer : MonoBehaviour {
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", "ready");
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 1);
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/volume", "ready");
+		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/ballspeed", "ready");
         //*************
 
         rb = GetComponent<Rigidbody> ();
 		count = 0;
 		setCountText ();
+
 	}
 	
 
@@ -51,8 +53,8 @@ public class MovePlayer : MonoBehaviour {
 		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 
 		rb.AddForce (movement*speed);
-		Debug.Log((movement*speed).magnitude);
-		ballSpeed = (movement*speed).magnitude;
+		Debug.Log(Mathf.Round(rb.velocity.magnitude*1000f)/1000f);
+		ballSpeed = Mathf.Round(rb.velocity.magnitude*1000f)/1000f;
 		speedUpdate();
 
 		//************* Routine for receiving the OSC...
