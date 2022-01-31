@@ -32,6 +32,7 @@ public class MovePlayer : MonoBehaviour {
 	    OSCHandler.Instance.Init ();
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", "ready");
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 1);
+		OSCHandler.Instance.SendMessageToClient("pd", "/unity/rollseq", 1);
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/volume", "ready");
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/ballspeed", "ready");
         //*************
@@ -53,7 +54,7 @@ public class MovePlayer : MonoBehaviour {
 		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 
 		rb.AddForce (movement*speed);
-		Debug.Log(Mathf.Round(rb.velocity.magnitude*1000f)/1000f);
+		//Debug.Log(Mathf.Round(rb.velocity.magnitude*1000f)/1000f);
 		ballSpeed = Mathf.Round(rb.velocity.magnitude*1000f)/1000f;
 		speedUpdate();
 
