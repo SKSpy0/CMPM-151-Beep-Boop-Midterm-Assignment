@@ -95,7 +95,7 @@ public class MovePlayer : MonoBehaviour {
 				setCountText ();
 
 
-				change the tempo of the sequence based on how many obejcts we have picked up.
+				//change the tempo of the sequence based on how many obejcts we have picked up.
 				if(count < 2)
 				{
 					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 500);
