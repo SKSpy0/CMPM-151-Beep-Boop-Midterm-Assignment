@@ -35,6 +35,8 @@ public class MovePlayer : MonoBehaviour {
 		OSCHandler.Instance.SendMessageToClient("pd", "/unity/rollseq", 1);
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/volume", "ready");
 		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/ballspeed", "ready");
+		// OSCHandler.Instance.SendMessageToClient ("pd", "/unity/wrongball", 0);
+		// OSCHandler.Instance.SendMessageToClient ("pd", "/unity/rightball", 0);
         //*************
 
         rb = GetComponent<Rigidbody> ();
@@ -93,7 +95,7 @@ public class MovePlayer : MonoBehaviour {
 				setCountText ();
 
 
-				// change the tempo of the sequence based on how many obejcts we have picked up.
+				change the tempo of the sequence based on how many obejcts we have picked up.
 				if(count < 2)
 				{
 					OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 500);
@@ -114,10 +116,12 @@ public class MovePlayer : MonoBehaviour {
 				{
 					OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 0);
 				}
+				OSCHandler.Instance.SendMessageToClient("pd", "/unity/rightball", 1);
 			}
 			else
 			{
-				Debug.Log("Wrong color");
+				Debug.Log("Wrong ball");
+				OSCHandler.Instance.SendMessageToClient("pd", "/unity/wrongball", 1);
 			}
 
         }
@@ -135,7 +139,8 @@ public class MovePlayer : MonoBehaviour {
 		countText.text = "Count: " + count.ToString ();
 
 		//************* Send the message to the client...
-		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", count);
+		// OSCHandler.Instance.SendMessageToClient ("pd", "/unity/trigger", count);
+		OSCHandler.Instance.SendMessageToClient ("pd", "/unity/rightball", 1);
 		//*************
 	}
 	
